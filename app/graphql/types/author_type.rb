@@ -10,6 +10,8 @@ class Types::AuthorType < Types::BaseObject
 
   field :full_name, String, null: true
   field :full_name_inverse, String, null: true
+  field :coordinates, Types::CoordinatesType, null: false
+  field :publication_years, [Int], null: false
 
   def full_name_inverse
     "#{object.last_name} #{object.first_name}"

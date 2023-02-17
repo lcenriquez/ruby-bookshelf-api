@@ -16,12 +16,18 @@ module Types
       "Hello #{name}"
     end
 
-    field :author, Types::AuthorType, null: true, description: "Return one Author instance" do
+    field :author, Types::AuthorType, null: true, description: "Return one author instance by id" do
       argument :id, ID, required: true
     end
 
     def author(id: ID)
       Author.where(id: id).first
+    end
+
+    field :authors, [Types::AuthorType], null: false, description: "Returns a list of all authors in the bookshelf"
+
+    def authors
+      Author.all
     end
   end
 end

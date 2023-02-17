@@ -13,6 +13,14 @@ class Types::AuthorType < Types::BaseObject
   field :coordinates, Types::CoordinatesType, null: false
   field :publication_years, [Int], null: false
 
+  field :errors, [Types::ErrorType], null: true
+
+  def errors
+    object.errors.map do |e|
+      { field_name: e.attribute, errors: object.errors[e.attribute] }
+    end
+  end
+
   def full_name_inverse
     "#{object.last_name} #{object.first_name}"
   end

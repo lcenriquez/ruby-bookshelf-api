@@ -14,7 +14,8 @@ class GraphqlController < ApplicationController
 
     context = {
       time: Time.now,
-      current_user: session&.user
+      current_user: session&.user,
+      session_id: session&.id
     }
     result = RubyBookshelfApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result

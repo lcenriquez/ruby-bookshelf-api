@@ -46,5 +46,11 @@ module Types
     def current_user
       context[:current_user]
     end
+
+    field :logout, Boolean, description: "Log a user out"
+
+    def logout
+      Session.where(id: context[:session_id]).destroy_all
+    end
   end
 end

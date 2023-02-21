@@ -24,6 +24,11 @@ class Types::AuthorType < Types::BaseObject
   def full_name_inverse
     "#{object.last_name} #{object.first_name}"
   end
+
+  def self.authorized?(object, context)
+    # Return only authors who are not alive
+    !object.is_alive?
+  end
 end
 
 class Types::AuthorInputType < GraphQL::Schema::InputObject
